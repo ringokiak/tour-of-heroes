@@ -2,7 +2,7 @@
  * @Author: r1ngo
  * @Date: 2022-03-23 14:38:40
  * @LastEditors: r1ngo
- * @LastEditTime: 2022-03-23 16:13:47
+ * @LastEditTime: 2022-03-23 16:28:42
  * @Description: ez pz lemon squezzy
  */
 import { Injectable } from '@angular/core';
@@ -32,6 +32,17 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap((_) => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
+  }
+  getHeroNo404<Data>(id: number): Observable<Hero> {
+    const url = `${this.heroesUrl}/?id=${id}`;
+    return this.http.get<Hero[]>(url).pipe(
+      map((heroes) => heroes[0]),
+      tap((h) => {
+        const outcome = h ? 'fetched' : 'did not find';
+        this.log(`${outcome} hero id=${id}`);
+      }),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
