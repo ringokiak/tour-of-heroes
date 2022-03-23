@@ -1,0 +1,23 @@
+<!--
+ * @Author: r1ngo
+ * @Date: 2022-03-23 14:00:53
+ * @LastEditors: r1ngo
+ * @LastEditTime: 2022-03-23 15:57:52
+ * @Description: ez pz lemon squezzy
+-->
+<h2>My Heroes</h2>
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
+  <button class="add-button" (click)="add(heroName.value); heroName.value = ''">
+    Add hero
+  </button>
+</div>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{ hero.id }}">
+      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+    </a>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
+  </li>
+</ul>

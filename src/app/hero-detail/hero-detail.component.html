@@ -1,0 +1,17 @@
+<!--
+ * @Author: r1ngo
+ * @Date: 2022-03-23 14:25:12
+ * @LastEditors: r1ngo
+ * @LastEditTime: 2022-03-23 15:44:25
+ * @Description: ez pz lemon squezzy
+-->
+<div *ngIf="hero">
+  <h2>{{ hero.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ hero.id }}</div>
+  <div>
+    <label for="name">Hero Name: </label>
+    <input type="text" id="name" [(ngModel)]="hero.name" />
+  </div>
+  <button (click)="save()">save</button>
+  <button (click)="goBack()">go back</button>
+</div>
